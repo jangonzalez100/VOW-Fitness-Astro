@@ -1,0 +1,148 @@
+---
+const stories = [
+	{
+		quote: "In twenty six weeks I dropped four percent body fat and gained the kind of poise you can't fake in a deposition. Anthony coaches the woman, not the workout.",
+		italic: "the woman",
+		name: "Mara A.",
+		result: "−4% body fat · 26 wks"
+	},
+	{
+		quote: "I came in skeptical and overscheduled. I leave every session with a plan I trust, and the only standing appointment I now keep religiously.",
+		italic: "religiously",
+		name: "Diane K.",
+		result: "Stronger at 49 than 39"
+	},
+	{
+		quote: "At 52 I am stronger than I was at 32. Measurably. The protocols are exquisite. The accountability is the most luxurious thing on my calendar.",
+		italic: "calendar",
+		name: "Renée S.",
+		result: "+18 lbs deadlift · 1 yr"
+	}
+];
+---
+
+<section class="stories" id="stories">
+	<div class="container">
+		<div class="section-header">
+			<span class="eyebrow">From Women Like You</span>
+			<h2 class="section-title">What they say <em class="italic">once they've stayed.</em></h2>
+		</div>
+
+		<div class="stories-grid">
+			{stories.map((story) => (
+				<div class="story-card">
+					<div class="quote-icon">“</div>
+					<p class="story-quote">
+						"{story.quote.split(story.italic)[0]}
+						<em class="italic">{story.italic}</em>
+						{story.quote.split(story.italic)[1]}"
+					</p>
+					<div class="story-meta">
+						<span class="story-name">— {story.name}</span>
+						<span class="story-result">{story.result}</span>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.stories {
+		padding: var(--section-padding) 0;
+		background: var(--black);
+		position: relative;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 5rem;
+	}
+
+	.stories-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.5rem;
+	}
+
+	.story-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		padding: 2rem;
+		border-left: 1px solid rgba(184, 144, 47, 0.15);
+		background: rgba(255, 255, 255, 0.01);
+		transition: background 0.4s ease;
+	}
+
+	.story-card:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.quote-icon {
+		font-family: 'Cormorant Garamond', serif;
+		font-size: 4rem;
+		line-height: 1;
+		color: var(--gold);
+		opacity: 0.2;
+	}
+
+	.story-quote {
+		font-family: 'Cormorant Garamond', serif;
+		font-size: 1.4rem;
+		line-height: 1.4;
+		color: var(--ivory);
+		font-weight: 300;
+	}
+
+	.story-quote em {
+		font-style: italic;
+		font-weight: 300;
+		color: var(--gold-light);
+	}
+
+	.story-meta {
+		margin-top: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.story-name {
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+
+	.story-result {
+		font-size: 0.7rem;
+		color: var(--ash);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	@media (max-width: 1000px) {
+		.stories-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from('.story-card', {
+		scrollTrigger: {
+			trigger: '.stories-grid',
+			start: 'top 80%',
+		},
+		x: 20,
+		opacity: 0,
+		stagger: 0.2,
+		duration: 1.2,
+		ease: 'power3.out'
+	});
+</script>

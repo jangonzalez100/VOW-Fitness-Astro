@@ -1,0 +1,237 @@
+---
+import Monogram from './Monogram.astro';
+---
+
+<section class="hero" id="hero">
+	<div class="hero-visuals">
+		<div class="hero-gradient"></div>
+		<div class="hero-noise"></div>
+	</div>
+	
+	<div class="container hero-content">
+		<div class="hero-monogram-wrapper">
+			<Monogram size={140} className="hero-monogram" />
+		</div>
+		
+		<h1 class="hero-headline">
+			We help driven women <em class="italic">over 40</em> finally <span class="gold-text">transform their body</span>, for good.
+		</h1>
+		
+		<div class="hero-details">
+			<ul class="hero-desires">
+				<li class="desire-item"><span>01</span> Reclaim your energy</li>
+				<li class="desire-item"><span>02</span> Build a body you're proud of</li>
+				<li class="desire-item"><span>03</span> Feel like yourself again</li>
+			</ul>
+			
+			<div class="hero-cta-group">
+				<a href="#book" class="btn hero-btn">
+					Book Your Free Call 
+					<span class="arrow">↗</span>
+				</a>
+				<p class="hero-fineprint">A 30 minute conversation. No pitch.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="hero-scroll-indicator">
+		<span class="scroll-text">Explore</span>
+		<div class="scroll-line"></div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 120px 0 80px;
+		overflow: hidden;
+	}
+
+	.hero-visuals {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+	}
+
+	.hero-gradient {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(circle at 50% 50%, rgba(184, 144, 47, 0.1) 0%, rgba(10, 10, 10, 1) 80%);
+	}
+
+	.hero-noise {
+		position: absolute;
+		inset: 0;
+		background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+		opacity: 0.15;
+		pointer-events: none;
+		filter: contrast(150%) brightness(1000%);
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 10;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.hero-monogram-wrapper {
+		margin-bottom: 2rem;
+	}
+
+	.hero-headline {
+		font-size: clamp(2.5rem, 6.5vw, 5rem);
+		line-height: 1;
+		max-width: 1100px;
+		margin-bottom: 3.5rem;
+		font-weight: 300;
+	}
+
+	.hero-headline em {
+		font-family: 'Cormorant Garamond', serif;
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.gold-text {
+		color: var(--gold-light);
+	}
+
+	.hero-details {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		align-items: flex-end;
+		max-width: 1100px;
+		text-align: left;
+	}
+
+	.hero-desires {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.desire-item {
+		display: flex;
+		align-items: center;
+		gap: 1.2rem;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--ash);
+	}
+
+	.desire-item span {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.65rem;
+		color: var(--gold);
+	}
+
+	.hero-cta-group {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.8rem;
+	}
+
+	.hero-fineprint {
+		font-size: 0.7rem;
+		color: var(--ash);
+		letter-spacing: 0.05em;
+	}
+
+	.hero-scroll-indicator {
+		position: absolute;
+		bottom: 2.5rem;
+		left: 4vw;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.8rem;
+	}
+
+	.scroll-text {
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
+		writing-mode: vertical-lr;
+		color: var(--ash);
+	}
+
+	.scroll-line {
+		width: 1px;
+		height: 50px;
+		background: linear-gradient(to bottom, var(--gold), transparent);
+	}
+
+	@media (max-width: 900px) {
+		.hero-details {
+			flex-direction: column;
+			align-items: center;
+			gap: 2.5rem;
+			text-align: center;
+		}
+		.hero-cta-group {
+			align-items: center;
+		}
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+
+	const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.5 } });
+
+	// Ensure elements are initially visible but hidden by GSAP
+	gsap.set('.hero-monogram, .hero-headline, .desire-item, .hero-cta-group, .hero-scroll-indicator', { 
+		opacity: 0,
+		y: 20
+	});
+
+	tl.to('.hero-monogram', {
+		scale: 1,
+		opacity: 1,
+		y: 0,
+		rotate: 0,
+		duration: 2,
+	})
+	.to('.hero-headline', {
+		y: 0,
+		opacity: 1,
+	}, '-=1.2')
+	.to('.desire-item', {
+		x: 0,
+		y: 0,
+		opacity: 1,
+		stagger: 0.15,
+	}, '-=1')
+	.to('.hero-cta-group', {
+		y: 0,
+		opacity: 1,
+	}, '-=1')
+	.to('.hero-scroll-indicator', {
+		opacity: 1,
+		y: 0
+	}, '-=0.5');
+
+	// Parallax effect
+	window.addEventListener('mousemove', (e) => {
+		const { clientX, clientY } = e;
+		const xPos = (clientX / window.innerWidth - 0.5) * 15;
+		const yPos = (clientY / window.innerHeight - 0.5) * 15;
+
+		gsap.to('.hero-monogram', {
+			x: xPos,
+			y: yPos,
+			duration: 1.2,
+			ease: 'power2.out'
+		});
+	});
+</script>

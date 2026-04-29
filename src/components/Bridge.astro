@@ -1,0 +1,102 @@
+---
+---
+
+<section class="bridge">
+	<div class="container bridge-inner">
+		<div class="bridge-line"></div>
+		<h2 class="bridge-headline">
+			That's exactly why <span class="gold-text"><em class="italic">VOW</em></span> exists.
+		</h2>
+		<p class="bridge-text">
+			You don't need another app, another challenge, or another trainer with a one size plan. You need a coach who builds the work around you, and stays with you until the woman in the mirror is the one you've been picturing.
+		</p>
+		<div class="bridge-line bottom"></div>
+	</div>
+</section>
+
+<style>
+	.bridge {
+		padding: var(--section-padding) 0;
+		background: var(--black);
+		text-align: center;
+		position: relative;
+	}
+
+	.bridge-inner {
+		max-width: 850px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.bridge-line {
+		width: 1px;
+		height: 80px;
+		background: linear-gradient(to bottom, var(--gold), transparent);
+		margin-bottom: 3rem;
+	}
+
+	.bridge-line.bottom {
+		margin-top: 3rem;
+		margin-bottom: 0;
+		background: linear-gradient(to top, var(--gold), transparent);
+	}
+
+	.bridge-headline {
+		font-size: clamp(2.2rem, 5vw, 3.8rem);
+		margin-bottom: 2.5rem;
+		line-height: 1.1;
+		font-weight: 300;
+	}
+
+	.bridge-headline em {
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.bridge-text {
+		font-size: 1.15rem;
+		line-height: 1.7;
+		color: var(--ash);
+		max-width: 650px;
+	}
+
+	@media (max-width: 600px) {
+		.bridge-text {
+			font-size: 1rem;
+		}
+		.bridge-line {
+			height: 50px;
+		}
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from('.bridge-headline', {
+		scrollTrigger: {
+			trigger: '.bridge-headline',
+			start: 'top 85%',
+		},
+		y: 30,
+		opacity: 0,
+		duration: 1.2,
+		ease: 'power3.out'
+	});
+
+	gsap.from('.bridge-text', {
+		scrollTrigger: {
+			trigger: '.bridge-text',
+			start: 'top 85%',
+		},
+		y: 20,
+		opacity: 0,
+		duration: 1.2,
+		delay: 0.2,
+		ease: 'power3.out'
+	});
+</script>

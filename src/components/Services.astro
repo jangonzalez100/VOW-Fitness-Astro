@@ -1,0 +1,193 @@
+---
+const services = [
+	{
+		id: "01",
+		name: "1-on-1 Personal Training",
+		outcome: "A plan built around your life.",
+		desc: "Private sessions in studio, two or three times a week. Strength, mobility, and recovery, written for the body you have today and the one you want next quarter.",
+		meta: "Manhattan",
+		price: "from $980 / wk"
+	},
+	{
+		id: "02",
+		name: "Online Coaching",
+		outcome: "Your training, on your runway.",
+		desc: "Bespoke remote programming with weekly video reviews and daily check ins. The work travels with you instead of waiting on you.",
+		meta: "Worldwide",
+		price: "from $1,400 / mo"
+	},
+	{
+		id: "03",
+		name: "Nutrition Coaching",
+		outcome: "Your kitchen, finally on your side.",
+		desc: "Built around how you actually eat. Your dinners, your travel, your hormones, your wine. Protocols, not diets. A literate plan you can follow without thinking.",
+		meta: "Standalone or Paired",
+		price: "from $640 / mo"
+	}
+];
+
+function highlightYour(text: string) {
+	const parts = text.split(/(your)/i);
+	return parts.map(part => part.toLowerCase() === 'your' ? `<em class="italic">${part}</em>` : part).join('');
+}
+---
+
+<section class="services" id="services">
+	<div class="container">
+		<div class="section-header">
+			<span class="eyebrow">Choose Your Path</span>
+			<h2 class="section-title">Three ways to begin <em class="italic">the work.</em></h2>
+		</div>
+
+		<div class="services-grid">
+			{services.map((service) => (
+				<article class="service-card">
+					<div class="s-header">
+						<span class="s-id">Service {service.id}</span>
+						<h3 class="s-outcome" set:html={highlightYour(service.outcome)}></h3>
+					</div>
+					
+					<div class="s-body">
+						<h4 class="s-name">{service.name}</h4>
+						<p class="s-desc">{service.desc}</p>
+					</div>
+
+					<div class="s-footer">
+						<span class="s-meta">{service.meta}</span>
+						<span class="s-price">{service.price}</span>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		padding: var(--section-padding) 0;
+		background: var(--black);
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 5rem;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.service-card {
+		background: var(--charcoal);
+		padding: 3rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 1px solid rgba(255, 255, 255, 0.03);
+		transition: all 0.5s var(--transition-smooth);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.service-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: var(--gold);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.6s var(--transition-smooth);
+	}
+
+	.service-card:hover {
+		transform: translateY(-8px);
+		border-color: rgba(184, 144, 47, 0.2);
+		background: #1a1a1a;
+	}
+
+	.service-card:hover::before {
+		transform: scaleX(1);
+	}
+
+	.s-id {
+		display: block;
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		color: var(--gold);
+		margin-bottom: 1.5rem;
+	}
+
+	.s-outcome {
+		font-size: 1.8rem;
+		line-height: 1.2;
+		margin-bottom: 3.5rem;
+		font-weight: 300;
+	}
+
+	:global(.s-outcome .italic) {
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.s-name {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--ivory);
+		margin-bottom: 1rem;
+	}
+
+	.s-desc {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: var(--ash);
+		margin-bottom: 3rem;
+	}
+
+	.s-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		font-size: 0.7rem;
+		color: var(--ash);
+	}
+
+	.s-price {
+		color: var(--gold-light);
+		font-weight: 500;
+	}
+
+	@media (max-width: 1100px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from('.service-card', {
+		scrollTrigger: {
+			trigger: '.services-grid',
+			start: 'top 80%',
+		},
+		y: 40,
+		opacity: 0,
+		stagger: 0.15,
+		duration: 1,
+		ease: 'power2.out'
+	});
+</script>

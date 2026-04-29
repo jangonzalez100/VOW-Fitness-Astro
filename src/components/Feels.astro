@@ -1,0 +1,180 @@
+---
+---
+
+<section class="feels" id="feels">
+	<div class="container">
+		<div class="feels-grid">
+			<article class="feels-card want">
+				<div class="card-glow"></div>
+				<span class="eyebrow">You Want To</span>
+				<h3 class="card-title">Feel like <em class="italic">yourself</em> again.</h3>
+				<ul class="feels-list">
+					<li>
+						<div class="dot"></div>
+						<span>Have more energy. For work, for family, for you.</span>
+					</li>
+					<li>
+						<div class="dot"></div>
+						<span>A body that matches your drive.</span>
+					</li>
+					<li>
+						<div class="dot"></div>
+						<span>Consistency that actually lasts this time.</span>
+					</li>
+				</ul>
+			</article>
+
+			<article class="feels-card struggle">
+				<div class="card-glow"></div>
+				<span class="eyebrow">But You're Struggling With</span>
+				<h3 class="card-title">The plans you've tried <em class="italic">aren't built for your life.</em></h3>
+				<ul class="feels-list">
+					<li>
+						<div class="dot ash"></div>
+						<span>No time for programs that don't fit your week.</span>
+					</li>
+					<li>
+						<div class="dot ash"></div>
+						<span>You've tried everything, and nothing has stuck.</span>
+					</li>
+					<li>
+						<div class="dot ash"></div>
+						<span>You don't know where to start, or who to trust.</span>
+					</li>
+				</ul>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.feels {
+		padding: var(--section-padding) 0;
+		background: var(--black);
+		position: relative;
+	}
+
+	.feels-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	.feels-card {
+		position: relative;
+		padding: 3.5rem;
+		background: var(--charcoal);
+		border: 1px solid rgba(255, 255, 255, 0.03);
+		overflow: hidden;
+		transition: all 0.6s var(--transition-smooth);
+	}
+
+	.feels-card:hover {
+		transform: translateY(-8px);
+		border-color: rgba(184, 144, 47, 0.2);
+		background: #1a1a1a;
+	}
+
+	.card-glow {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(184, 144, 47, 0.05) 0%, transparent 60%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+	}
+
+	.feels-card:hover .card-glow {
+		opacity: 1;
+	}
+
+	.eyebrow {
+		display: block;
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--gold);
+		margin-bottom: 1.5rem;
+	}
+
+	.card-title {
+		font-size: 2.2rem;
+		line-height: 1.2;
+		margin-bottom: 2.5rem;
+		font-weight: 300;
+	}
+
+	.card-title em {
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.feels-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.2rem;
+	}
+
+	.feels-list li {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		font-size: 0.95rem;
+		color: var(--ash);
+		line-height: 1.6;
+	}
+
+	.dot {
+		width: 5px;
+		height: 5px;
+		background: var(--gold);
+		margin-top: 0.5rem;
+		flex-shrink: 0;
+	}
+
+	.dot.ash {
+		background: #333;
+	}
+
+	@media (max-width: 900px) {
+		.feels-grid {
+			grid-template-columns: 1fr;
+		}
+		.feels-card {
+			padding: 2rem;
+		}
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const cards = document.querySelectorAll('.feels-card');
+
+	cards.forEach((card) => {
+		card.addEventListener('mousemove', (e: any) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			(card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+			(card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+		});
+
+		gsap.from(card, {
+			scrollTrigger: {
+				trigger: card,
+				start: 'top 85%',
+			},
+			y: 40,
+			opacity: 0,
+			duration: 1,
+			ease: 'power2.out'
+		});
+	});
+</script>

@@ -1,0 +1,152 @@
+---
+import Monogram from './Monogram.astro';
+---
+
+<footer class="foot">
+	<div class="container">
+		<div class="foot-grid">
+			<div class="foot-brand">
+				<div class="foot-logo">
+					<Monogram size={32} />
+					<span class="foot-wordmark">VOW</span>
+				</div>
+				<p class="foot-tagline">Vision · Ownership · Wellness</p>
+			</div>
+
+			<nav class="foot-nav">
+				<div class="nav-col">
+					<span class="col-title">Navigation</span>
+					<a href="#how">How It Works</a>
+					<a href="#services">Services</a>
+					<a href="#stories">Stories</a>
+					<a href="#book">Book</a>
+				</div>
+				<div class="nav-col">
+					<span class="col-title">Legal</span>
+					<a href="#">Privacy Policy</a>
+					<a href="#">Terms of Service</a>
+				</div>
+			</nav>
+
+			<div class="foot-contact">
+				<span class="col-title">Location</span>
+				<p>Manhattan, NY</p>
+				<p>Remote Worldwide</p>
+			</div>
+		</div>
+
+		<div class="foot-bottom">
+			<small>© {new Date().getFullYear()} VOW Fitness. All Rights Reserved.</small>
+			<div class="foot-socials">
+				<a href="#">Instagram</a>
+				<a href="#">LinkedIn</a>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.foot {
+		padding: 8rem 0 4rem;
+		background: #050505;
+		border-top: 1px solid rgba(255, 255, 255, 0.03);
+	}
+
+	.foot-grid {
+		display: grid;
+		grid-template-columns: 1.5fr 2fr 1fr;
+		gap: 4rem;
+		margin-bottom: 6rem;
+	}
+
+	.foot-logo {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.foot-wordmark {
+		font-size: 1.5rem;
+		letter-spacing: 0.3em;
+		font-weight: 500;
+	}
+
+	.foot-tagline {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--ash);
+	}
+
+	.foot-nav {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+	}
+
+	.nav-col {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.col-title {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--gold);
+		margin-bottom: 1rem;
+	}
+
+	.nav-col a, .foot-contact p {
+		font-size: 0.9rem;
+		color: var(--ash);
+		transition: color 0.3s ease;
+	}
+
+	.nav-col a:hover {
+		color: var(--gold-light);
+	}
+
+	.foot-bottom {
+		padding-top: 4rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.03);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: #333;
+		font-size: 0.75rem;
+	}
+
+	.foot-socials {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.foot-socials a {
+		color: #333;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		transition: color 0.3s ease;
+	}
+
+	.foot-socials a:hover {
+		color: var(--gold);
+	}
+
+	@media (max-width: 900px) {
+		.foot-grid {
+			grid-template-columns: 1fr;
+			gap: 4rem;
+		}
+		.foot-nav {
+			grid-template-columns: 1fr;
+		}
+		.foot-bottom {
+			flex-direction: column;
+			gap: 2rem;
+			text-align: center;
+		}
+	}
+</style>
