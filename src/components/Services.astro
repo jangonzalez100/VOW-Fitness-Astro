@@ -41,7 +41,7 @@ function highlightYour(text: string) {
 
 		<div class="services-grid">
 			{services.map((service) => (
-				<article class="service-card">
+				<article class="service-card reveal-card">
 					<div class="s-header">
 						<span class="s-id">Service {service.id}</span>
 						<h3 class="s-outcome" set:html={highlightYour(service.outcome)}></h3>
@@ -66,6 +66,8 @@ function highlightYour(text: string) {
 	.services {
 		padding: var(--section-padding) 0;
 		background: var(--black);
+		position: relative;
+		z-index: 10;
 	}
 
 	.section-header {
@@ -77,6 +79,7 @@ function highlightYour(text: string) {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
+		min-height: 400px; /* Ensure space is reserved */
 	}
 
 	.service-card {
@@ -86,9 +89,10 @@ function highlightYour(text: string) {
 		flex-direction: column;
 		justify-content: space-between;
 		border: 1px solid rgba(255, 255, 255, 0.03);
-		transition: all 0.5s var(--transition-smooth);
+		transition: transform 0.5s var(--transition-smooth), border-color 0.5s ease, background 0.5s ease;
 		position: relative;
 		overflow: hidden;
+		opacity: 1; /* Default to visible for SSR/JS failure */
 	}
 
 	.service-card::before {
@@ -179,15 +183,29 @@ function highlightYour(text: string) {
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	gsap.from('.service-card', {
-		scrollTrigger: {
-			trigger: '.services-grid',
-			start: 'top 80%',
-		},
-		y: 40,
+	// Set initial state via JS instead of CSS to avoid permanent invisibility if JS fails
+	gsap.set('.reveal-card', { 
 		opacity: 0,
-		stagger: 0.15,
-		duration: 1,
-		ease: 'power2.out'
+		y: 40
 	});
+
+	ScrollTrigger.batch('.reveal-card', {
+		onEnter: (batch) => {
+			gsap.to(batch, {
+				opacity: 1,
+				y: 0,
+				stagger: 0.15,
+				duration: 1,
+				ease: 'power2.out',
+				overwrite: true
+			});
+		},
+		start: 'top 85%',
+		once: true
+	});
+
+	// Fallback: If ScrollTrigger hasn't fired after a few seconds, show them anyway
+	setTimeout(() => {
+		gsap.to('.reveal-card', { opacity: 1, y: 0, duration: 1, stagger: 0.1 });
+	}, 3000);
 </script>
