@@ -3,9 +3,9 @@ import Monogram from './Monogram.astro';
 ---
 
 <section class="hero" id="hero">
-	<div class="hero-visuals">
-		<div class="hero-gradient"></div>
-		<div class="hero-noise"></div>
+	<div class="hero-bg">
+		<img src="https://res.cloudinary.com/dzaz02jrd/image/upload/v1777588740/ChatGPT_Image_Apr_30_2026_06_30_00_PM_okxnw6.png" alt="Hero Background" />
+		<div class="hero-overlay"></div>
 	</div>
 	
 	<div class="container hero-content">
@@ -19,9 +19,11 @@ import Monogram from './Monogram.astro';
 		
 		<div class="hero-details">
 			<ul class="hero-desires">
-				<li class="desire-item"><span>01</span> Reclaim your energy</li>
-				<li class="desire-item"><span>02</span> Build a body you're proud of</li>
-				<li class="desire-item"><span>03</span> Feel like yourself again</li>
+				<li class="desire-item">Reclaim your energy</li>
+				<li class="desire-dot"></li>
+				<li class="desire-item">Build a body you're proud of</li>
+				<li class="desire-dot"></li>
+				<li class="desire-item">Feel like yourself again</li>
 			</ul>
 			
 			<div class="hero-cta-group">
@@ -47,28 +49,26 @@ import Monogram from './Monogram.astro';
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 120px 0 80px;
+		padding: 120px 0 120px;
 		overflow: hidden;
 	}
 
-	.hero-visuals {
+	.hero-bg {
 		position: absolute;
 		inset: 0;
 		z-index: -1;
 	}
 
-	.hero-gradient {
-		position: absolute;
-		inset: 0;
-		background: radial-gradient(circle at 50% 50%, rgba(184, 144, 47, 0.1) 0%, rgba(10, 10, 10, 1) 80%);
+	.hero-bg img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
-	.hero-noise {
+	.hero-overlay {
 		position: absolute;
 		inset: 0;
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-		opacity: 0.05;
-		pointer-events: none;
+		background: rgba(0, 0, 0, 0.6);
 	}
 
 	.hero-content {
@@ -86,9 +86,9 @@ import Monogram from './Monogram.astro';
 
 	.hero-headline {
 		font-size: clamp(2.5rem, 6.5vw, 5rem);
-		line-height: 1;
+		line-height: 1.1;
 		max-width: 1100px;
-		margin-bottom: 3.5rem;
+		margin-bottom: 4rem;
 		font-weight: 300;
 	}
 
@@ -104,39 +104,38 @@ import Monogram from './Monogram.astro';
 
 	.hero-details {
 		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3.5rem;
 		width: 100%;
-		justify-content: space-between;
-		align-items: flex-end;
 		max-width: 1100px;
-		text-align: left;
 	}
 
 	.hero-desires {
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+		align-items: center;
+		gap: 1.5rem;
 	}
 
 	.desire-item {
-		display: flex;
-		align-items: center;
-		gap: 1.2rem;
 		font-size: 0.85rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: var(--ash);
+		color: var(--ivory);
+		white-space: nowrap;
 	}
 
-	.desire-item span {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.65rem;
-		color: var(--gold);
+	.desire-dot {
+		width: 4px;
+		height: 4px;
+		background: var(--gold);
+		border-radius: 50%;
 	}
 
 	.hero-cta-group {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
+		align-items: center;
 		gap: 0.8rem;
 	}
 
@@ -171,14 +170,18 @@ import Monogram from './Monogram.astro';
 	}
 
 	@media (max-width: 900px) {
-		.hero-details {
-			flex-direction: column;
-			align-items: center;
-			gap: 2.5rem;
-			text-align: center;
+		.hero {
+			padding: 120px 4vw 80px;
 		}
-		.hero-cta-group {
-			align-items: center;
+		.hero-desires {
+			flex-direction: column;
+			gap: 1rem;
+		}
+		.desire-dot {
+			display: none;
+		}
+		.hero-headline {
+			margin-bottom: 3rem;
 		}
 	}
 </style>

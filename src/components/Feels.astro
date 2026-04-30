@@ -5,7 +5,6 @@
 	<div class="container">
 		<div class="feels-grid">
 			<article class="feels-card want">
-				<div class="card-glow"></div>
 				<span class="eyebrow">You Want To</span>
 				<h3 class="card-title">Feel like <em class="italic">yourself</em> again.</h3>
 				<ul class="feels-list">
@@ -25,7 +24,6 @@
 			</article>
 
 			<article class="feels-card struggle">
-				<div class="card-glow"></div>
 				<span class="eyebrow">But You're Struggling With</span>
 				<h3 class="card-title">The plans you've tried <em class="italic">aren't built for your life.</em></h3>
 				<ul class="feels-list">
@@ -62,33 +60,22 @@
 
 	.feels-card {
 		position: relative;
-		padding: 3.5rem;
-		background: var(--charcoal);
-		border: 1px solid rgba(255, 255, 255, 0.03);
+		padding: 48px;
+		background: #161616;
 		overflow: hidden;
-		transition: all 0.6s var(--transition-smooth);
+		transition: transform 0.6s var(--transition-smooth);
+	}
+
+	.feels-card.want {
+		border-top: 2px solid var(--gold);
+	}
+
+	.feels-card.struggle {
+		border-top: 1px solid var(--ash);
 	}
 
 	.feels-card:hover {
 		transform: translateY(-8px);
-		border-color: rgba(184, 144, 47, 0.2);
-		background: #1a1a1a;
-	}
-
-	.card-glow {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(184, 144, 47, 0.05) 0%, transparent 60%);
-		opacity: 0;
-		transition: opacity 0.4s ease;
-		pointer-events: none;
-	}
-
-	.feels-card:hover .card-glow {
-		opacity: 1;
 	}
 
 	.eyebrow {
@@ -144,7 +131,7 @@
 			grid-template-columns: 1fr;
 		}
 		.feels-card {
-			padding: 2rem;
+			padding: 40px 24px;
 		}
 	}
 </style>

@@ -35,29 +35,6 @@ const steps = [
 			{steps.map((step) => (
 				<div class="how-step">
 					<div class="step-num">{step.n}</div>
-					<div class="step-icon-wrapper">
-						{step.icon === 'phone' && (
-							<svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1">
-								<rect x="6" y="9" width="36" height="32" />
-								<path d="M6 17 H42" />
-								<path d="M16 5 V13 M32 5 V13" stroke-linecap="square" />
-								<circle cx="24" cy="28" r="4" />
-							</svg>
-						)}
-						{step.icon === 'document' && (
-							<svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1">
-								<path d="M10 6 H30 L40 16 V42 H10 Z" />
-								<path d="M30 6 V16 H40" />
-								<path d="M16 22 H32 M16 28 H32 M16 34 H26" stroke-linecap="square" />
-							</svg>
-						)}
-						{step.icon === 'chart' && (
-							<svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1">
-								<path d="M6 38 L18 26 L26 34 L42 16" stroke-linecap="square" />
-								<path d="M32 16 H42 V26" stroke-linecap="square" />
-							</svg>
-						)}
-					</div>
 					<h3 class="step-title">
 						{step.title.split(step.italic)[0]}
 						<em class="italic">{step.italic}</em>
@@ -68,6 +45,10 @@ const steps = [
 			))}
 		</div>
 
+		<div class="how-image-wrapper">
+			<img src="https://res.cloudinary.com/dzaz02jrd/image/upload/v1777588740/ChatGPT_Image_Apr_30_2026_06_33_48_PM_npjtlx.png" alt="Training Session" class="how-image" />
+		</div>
+
 		<div class="how-cta">
 			<a href="#book" class="btn">Book Your Free Call <span class="arrow">↗</span></a>
 		</div>
@@ -76,13 +57,13 @@ const steps = [
 
 <style>
 	.how {
-		padding: var(--section-padding) 0;
+		padding: 120px 0;
 		background: var(--black);
 	}
 
 	.section-header {
 		text-align: center;
-		margin-bottom: 5rem;
+		margin-bottom: 8rem;
 	}
 
 	.eyebrow {
@@ -107,40 +88,33 @@ const steps = [
 	.how-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 3rem;
-		margin-bottom: 5rem;
+		gap: 4rem;
+		margin-bottom: 8rem;
 	}
 
 	.how-step {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		text-align: center;
+		align-items: flex-start;
+		text-align: left;
 	}
 
 	.step-num {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.75rem;
+		font-family: 'Cormorant Garamond', serif;
+		font-size: 64px;
 		color: var(--gold);
-		margin-bottom: 1.5rem;
-		opacity: 0.4;
-	}
-
-	.step-icon-wrapper {
-		margin-bottom: 2rem;
-		color: var(--gold-light);
-		transition: transform 0.6s var(--transition-smooth);
-	}
-
-	.how-step:hover .step-icon-wrapper {
-		transform: scale(1.1) rotate(5deg);
+		opacity: 0.15;
+		line-height: 1;
+		margin-bottom: 1rem;
 	}
 
 	.step-title {
 		font-size: 1.6rem;
 		margin-bottom: 1.2rem;
 		font-weight: 300;
+		position: relative;
+		z-index: 2;
 	}
 
 	.step-title em {
@@ -152,18 +126,41 @@ const steps = [
 		font-size: 0.9rem;
 		line-height: 1.6;
 		color: var(--ash);
-		max-width: 280px;
+		max-width: 320px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.how-image-wrapper {
+		width: 100%;
+		margin-bottom: 5rem;
+		overflow: hidden;
+	}
+
+	.how-image {
+		width: 100%;
+		height: auto;
+		display: block;
+		object-fit: cover;
 	}
 
 	.how-cta {
 		display: flex;
 		justify-content: center;
+		margin-top: 2rem;
 	}
 
 	@media (max-width: 1000px) {
 		.how-grid {
 			grid-template-columns: 1fr;
 			gap: 4rem;
+		}
+		.how-step {
+			align-items: center;
+			text-align: center;
+		}
+		.section-header {
+			margin-bottom: 4rem;
 		}
 	}
 </style>

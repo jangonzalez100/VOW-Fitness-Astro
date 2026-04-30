@@ -38,8 +38,8 @@ const stories = [
 						{story.quote.split(story.italic)[1]}"
 					</p>
 					<div class="story-meta">
-						<span class="story-name">— {story.name}</span>
-						<span class="story-result">{story.result}</span>
+						<span class="story-name">- {story.name}</span>
+						<span class="story-result">{story.result.replace('−', '-').replace('·', '|')}</span>
 					</div>
 				</div>
 			))}
@@ -49,7 +49,7 @@ const stories = [
 
 <style>
 	.stories {
-		padding: var(--section-padding) 0;
+		padding: 120px 0;
 		background: var(--black);
 		position: relative;
 	}
@@ -62,29 +62,28 @@ const stories = [
 	.stories-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 2.5rem;
+		gap: 1.5rem;
 	}
 
 	.story-card {
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
-		padding: 2rem;
-		border-left: 1px solid rgba(184, 144, 47, 0.15);
-		background: rgba(255, 255, 255, 0.01);
-		transition: background 0.4s ease;
+		padding: 48px;
+		background: #161616;
+		transition: transform 0.4s ease;
 	}
 
 	.story-card:hover {
-		background: rgba(255, 255, 255, 0.03);
+		transform: translateY(-8px);
 	}
 
 	.quote-icon {
 		font-family: 'Cormorant Garamond', serif;
-		font-size: 4rem;
+		font-size: 80px;
 		line-height: 1;
 		color: var(--gold);
-		opacity: 0.2;
+		margin-bottom: -1rem;
 	}
 
 	.story-quote {
@@ -124,6 +123,9 @@ const stories = [
 		.stories-grid {
 			grid-template-columns: 1fr;
 			gap: 3rem;
+		}
+		.story-card {
+			padding: 40px 24px;
 		}
 	}
 </style>

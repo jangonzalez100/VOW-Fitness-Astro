@@ -2,7 +2,11 @@
 ---
 
 <section class="final" id="book">
-	<div class="final-bg"></div>
+	<div class="final-bg-container">
+		<img src="https://res.cloudinary.com/dzaz02jrd/image/upload/v1777588740/ChatGPT_Image_Apr_30_2026_06_36_37_PM_qtxhh5.png" alt="Final Background" class="final-bg-img" />
+		<div class="final-overlay"></div>
+	</div>
+	
 	<div class="container final-inner">
 		<span class="eyebrow">Your Move</span>
 		<h2 class="final-headline">
@@ -16,24 +20,39 @@
 			<a href="#" class="btn btn-large">Book Your Free Call <span class="arrow">↗</span></a>
 		</div>
 		
-		<span class="final-fineprint">12 women · By Invitation · Manhattan & Remote</span>
+		<span class="final-fineprint">12 women | By Invitation | Manhattan & Remote</span>
 	</div>
 </section>
 
 <style>
 	.final {
 		position: relative;
-		padding: 15vw 0;
+		padding: 120px 0;
 		background: var(--black);
 		text-align: center;
 		overflow: hidden;
+		min-height: 80vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.final-bg {
+	.final-bg-container {
 		position: absolute;
 		inset: 0;
-		background: radial-gradient(circle at 50% 100%, rgba(184, 144, 47, 0.15) 0%, transparent 70%);
 		z-index: 1;
+	}
+
+	.final-bg-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.final-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.65);
 	}
 
 	.final-inner {
@@ -42,6 +61,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		max-width: 900px;
 	}
 
 	.eyebrow {
@@ -50,19 +70,21 @@
 		text-transform: uppercase;
 		letter-spacing: 0.3em;
 		color: var(--gold);
-		margin-bottom: 3rem;
+		margin-bottom: 2.5rem;
 	}
 
 	.final-headline {
 		font-size: clamp(3rem, 8vw, 6rem);
-		line-height: 1;
+		line-height: 1.1;
 		margin-bottom: 2rem;
+		font-weight: 300;
 	}
 
 	.final-sub {
 		font-size: 1.2rem;
 		color: var(--ash);
 		margin-bottom: 4rem;
+		max-width: 600px;
 	}
 
 	.final-sub em {
@@ -72,7 +94,7 @@
 	}
 
 	.final-cta {
-		margin-bottom: 2.5rem;
+		margin-bottom: 3rem;
 	}
 
 	.btn-large {
@@ -82,12 +104,15 @@
 
 	.final-fineprint {
 		font-size: 0.75rem;
-		color: #404040;
+		color: rgba(255, 255, 255, 0.4);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 	}
 
 	@media (max-width: 600px) {
+		.final {
+			padding: 80px 4vw;
+		}
 		.final-sub {
 			font-size: 1rem;
 		}
