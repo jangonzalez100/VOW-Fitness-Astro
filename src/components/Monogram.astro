@@ -7,22 +7,17 @@ interface Props {
 const { size = 64, className = "" } = Astro.props;
 ---
 
-<svg class={className} width={size} height={size} viewBox="0 0 80 80" fill="none" aria-hidden="true">
-	<defs>
-		<linearGradient id="mg-grad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
-			<stop offset="0%" stop-color="#B8902F" />
-			<stop offset="50%" stop-color="#E2C97E" />
-			<stop offset="100%" stop-color="#C9A84C" />
-		</linearGradient>
-	</defs>
-	<path class="mg-diamond" d="M40 4 L76 40 L40 76 L4 40 Z" stroke="url(#mg-grad)" stroke-width="1" fill="none" opacity="0.55" />
-	<path class="mg-v" d="M16 22 L40 60 L64 22" stroke="url(#mg-grad)" stroke-width="1.5" fill="none" />
-	<path class="mg-m" d="M22 30 L32 50 L40 36 L48 50 L58 30" stroke="url(#mg-grad)" stroke-width="1.2" fill="none" opacity="0.85" />
-	<circle cx="40" cy="40" r="1.5" fill="#E2C97E" />
-</svg>
+<img 
+	src="https://res.cloudinary.com/dzaz02jrd/image/upload/v1777589842/ChatGPT_Image_Apr_30_2026_06_56_06_PM_bt2e3j.png" 
+	alt="VOW Fitness Logo" 
+	class={className} 
+	width={size} 
+	height={size} 
+	style={{ objectFit: 'contain' }}
+/>
 
 <style>
-	svg {
+	img {
 		display: block;
 	}
 </style>
